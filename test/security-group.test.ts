@@ -3,7 +3,7 @@ import { Vpc } from "@aws-cdk/aws-ec2";
 import { Stack } from "@aws-cdk/core";
 import { SecurityGroup } from "../src";
 
-describe("PrivateBucket", () => {
+describe("SecurityGroup", () => {
   it("should have named security group", () => {
     // Given
     const stack = new Stack();
