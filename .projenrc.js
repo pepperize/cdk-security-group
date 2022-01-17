@@ -8,8 +8,8 @@ const project = new awscdk.AwsCdkConstructLibrary({
   cdkVersion: "1.139.0",
   name: "@pepperize/cdk-security-group",
   description:
-    "This project provides a CDK construct for creating a security group with an extractable securityGroupName.",
-  keywords: ["aws", "cdk", "security group", "ec2"],
+    "This project provides a CDK construct to create an EC2 SecurityGroup, which property `securityGroupName` returns the GroupName.",
+  keywords: ["aws", "cdk", "security-group", "ec2"],
   repositoryUrl: "https://github.com/pepperize/cdk-security-group.git",
 
   autoApproveUpgrades: true,
