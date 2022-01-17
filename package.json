@@ -1,8 +1,9 @@
 {
-  "name": "cdk-security-group",
+  "name": "@pepperize/cdk-security-group",
+  "description": "This project provides a CDK construct for creating a security group with an extractable securityGroupName.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/johnny.unerty/cdk-security-group.git"
+    "url": "https://github.com/pepperize/cdk-security-group.git"
   },
   "scripts": {
     "build": "npx projen build",
@@ -15,35 +16,40 @@
     "eslint": "npx projen eslint",
     "package": "npx projen package",
     "package-all": "npx projen package-all",
+    "package:dotnet": "npx projen package:dotnet",
     "package:js": "npx projen package:js",
+    "package:python": "npx projen package:python",
     "post-compile": "npx projen post-compile",
+    "post-upgrade": "npx projen post-upgrade",
     "pre-compile": "npx projen pre-compile",
     "release": "npx projen release",
     "test": "npx projen test",
     "test:update": "npx projen test:update",
     "test:watch": "npx projen test:watch",
     "unbump": "npx projen unbump",
-    "upgrade": "npx projen upgrade",
     "upgrade-projen": "npx projen upgrade-projen",
     "watch": "npx projen watch",
-    "projen": "npx projen"
+    "projen": "npx projen",
+    "format": "prettier --write src/**/*.ts test/**/*.ts .projenrc.js README.md"
   },
   "author": {
     "name": "Ivan Ovdiienko",
-    "email": "johnny.unerty@gmail.com",
-    "organization": false
+    "email": "ivan.ovdiienko@pepperize.com",
+    "organization": true
   },
   "devDependencies": {
+    "@aws-cdk/assert": "^1.139.0",
+    "@aws-cdk/assertions": "^1.139.0",
     "@types/jest": "^27.4.0",
     "@types/node": "^12",
     "@typescript-eslint/eslint-plugin": "^5",
     "@typescript-eslint/parser": "^5",
-    "aws-cdk-lib": "2.1.0",
-    "constructs": "10.0.5",
     "eslint": "^8",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-import-resolver-node": "^0.3.6",
     "eslint-import-resolver-typescript": "^2.5.0",
     "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-prettier": "^4.0.0",
     "jest": "^27.4.7",
     "jest-junit": "^13",
     "jsii": "^1.52.1",
@@ -51,25 +57,38 @@
     "jsii-docgen": "^4.2.43",
     "json-schema": "^0.4.0",
     "npm-check-updates": "^12",
+    "prettier": "^2.5.1",
     "projen": "^0.50.33",
     "standard-version": "^9",
     "ts-jest": "^27.1.3",
     "typescript": "^4.5.4"
   },
   "peerDependencies": {
-    "aws-cdk-lib": "^2.1.0",
-    "constructs": "^10.0.5"
+    "@aws-cdk/aws-ec2": "^1.139.0",
+    "@aws-cdk/core": "^1.139.0",
+    "constructs": "^3.2.27"
+  },
+  "dependencies": {
+    "@aws-cdk/aws-ec2": "^1.139.0",
+    "@aws-cdk/core": "^1.139.0"
   },
   "keywords": [
-    "cdk"
+    "aws",
+    "cdk",
+    "ec2",
+    "security group"
   ],
   "main": "lib/index.js",
-  "license": "Apache-2.0",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "version": "0.0.0",
   "jest": {
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.ts?(x)",
-      "<rootDir>/(test|src)/**/?(*.)+(spec|test).ts?(x)"
+      "<rootDir>/(test|src)/**/?(*.)+(spec|test).ts?(x)",
+      "**/?(*.)@(spec|test).[tj]s?(x)"
     ],
     "clearMocks": true,
     "collectCoverage": true,
@@ -110,7 +129,16 @@
   "stability": "stable",
   "jsii": {
     "outdir": "dist",
-    "targets": {},
+    "targets": {
+      "python": {
+        "distName": "pepperize.cdk-security-group",
+        "module": "pepperize_cdk_security_group"
+      },
+      "dotnet": {
+        "namespace": "Pepperize.CDK",
+        "packageId": "Pepperize.CDK.SecurityGroup"
+      }
+    },
     "tsc": {
       "outDir": "lib",
       "rootDir": "src"
