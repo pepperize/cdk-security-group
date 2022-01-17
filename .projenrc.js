@@ -48,7 +48,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
 
   gitignore: [".idea/", "*.iml"],
 
-  cdkDependencies: ["@aws-cdk/aws-ec2"], // v1
+  cdkDependencies: ["@aws-cdk/aws-ec2", "@aws-cdk/custom-resources"], // v1
   cdkTestDependencies: ["@aws-cdk/assertions"],
 });
 

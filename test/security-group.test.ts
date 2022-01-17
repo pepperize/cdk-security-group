@@ -9,14 +9,16 @@ describe("SecurityGroup", () => {
     const stack = new Stack();
     const vpc = new Vpc(stack, "vpc");
     // When
-    const securityGroup = new SecurityGroup(stack, "id", {
+    new SecurityGroup(stack, "id", {
       vpc: vpc,
       securityGroupName: "pepperize",
     });
     // Then
     const template = Template.fromStack(stack);
     template.hasResource("AWS::EC2::SecurityGroup", {});
-    expect(securityGroup.getSecurityGroupName()).toEqual("pepperize");
+    template.hasResourceProperties("AWS::EC2::SecurityGroup", {
+      GroupName: "pepperize",
+    });
   });
 
   it("should match snapshot", () => {
