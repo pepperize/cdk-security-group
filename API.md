@@ -14,7 +14,7 @@ new SecurityGroup(scope: Construct, id: string, props: SecurityGroupProps)
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| [`scope`](#pepperizecdksecuritygroupsecuritygroupparameterscope)<span title="Required">*</span> | [`@aws-cdk/core.Construct`](#@aws-cdk/core.Construct) | *No description.* |
+| [`scope`](#pepperizecdksecuritygroupsecuritygroupparameterscope)<span title="Required">*</span> | [`constructs.Construct`](#constructs.Construct) | *No description.* |
 | [`id`](#pepperizecdksecuritygroupsecuritygroupparameterid)<span title="Required">*</span> | `string` | *No description.* |
 | [`props`](#pepperizecdksecuritygroupsecuritygroupparameterprops)<span title="Required">*</span> | [`@pepperize/cdk-security-group.SecurityGroupProps`](#@pepperize/cdk-security-group.SecurityGroupProps) | *No description.* |
 
@@ -22,7 +22,7 @@ new SecurityGroup(scope: Construct, id: string, props: SecurityGroupProps)
 
 ##### `scope`<sup>Required</sup> <a name="@pepperize/cdk-security-group.SecurityGroup.parameter.scope" id="pepperizecdksecuritygroupsecuritygroupparameterscope"></a>
 
-- *Type:* [`@aws-cdk/core.Construct`](#@aws-cdk/core.Construct)
+- *Type:* [`constructs.Construct`](#constructs.Construct)
 
 ---
 
@@ -77,7 +77,7 @@ const securityGroupProps: SecurityGroupProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| [`vpc`](#pepperizecdksecuritygroupsecuritygrouppropspropertyvpc)<span title="Required">*</span> | [`@aws-cdk/aws-ec2.IVpc`](#@aws-cdk/aws-ec2.IVpc) | The VPC in which to create the security group. |
+| [`vpc`](#pepperizecdksecuritygroupsecuritygrouppropspropertyvpc)<span title="Required">*</span> | [`aws-cdk-lib.aws_ec2.IVpc`](#aws-cdk-lib.aws_ec2.IVpc) | The VPC in which to create the security group. |
 | [`allowAllOutbound`](#pepperizecdksecuritygroupsecuritygrouppropspropertyallowalloutbound) | `boolean` | Whether to allow all outbound traffic by default. |
 | [`description`](#pepperizecdksecuritygroupsecuritygrouppropspropertydescription) | `string` | A description of the security group. |
 | [`disableInlineRules`](#pepperizecdksecuritygroupsecuritygrouppropspropertydisableinlinerules) | `boolean` | Whether to disable inline ingress and egress rule optimization. |
@@ -91,7 +91,7 @@ const securityGroupProps: SecurityGroupProps = { ... }
 public readonly vpc: IVpc;
 ```
 
-- *Type:* [`@aws-cdk/aws-ec2.IVpc`](#@aws-cdk/aws-ec2.IVpc)
+- *Type:* [`aws-cdk-lib.aws_ec2.IVpc`](#aws-cdk-lib.aws_ec2.IVpc)
 
 The VPC in which to create the security group.
 
