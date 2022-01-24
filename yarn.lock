@@ -3715,9 +3715,9 @@ jsii-diff@^1.52.1:
     yargs "^16.2.0"
 
 jsii-docgen@^4.2.43:
-  version "4.2.43"
-  resolved "https://registry.yarnpkg.com/jsii-docgen/-/jsii-docgen-4.2.43.tgz#674c1a495f205e29dc711f7407a55d6dc0484670"
-  integrity sha512-fEyiznLD2Vzhirj2MRTHSYmO8PU0pk85nKXYgsvNkBVkfkCa+vB1boAviStelMA9/V/7l5D678U29xXTY+Cd4w==
+  version "4.2.44"
+  resolved "https://registry.yarnpkg.com/jsii-docgen/-/jsii-docgen-4.2.44.tgz#388729e07efa3e947f5a511e556dee1cb51827db"
+  integrity sha512-JxMLnCGsWUVSOYDXaO4qXKGa1xOzXvk0UvXh296IBCNO+xmjWrb9si0NFERKc5DteUYxqpKicm6VxUiAatpyug==
   dependencies:
     "@jsii/spec" "^1.52.1"
     case "^1.6.3"
@@ -4322,9 +4322,9 @@ npm-bundled@^1.1.1:
     npm-normalize-package-bin "^1.0.1"
 
 npm-check-updates@^12:
-  version "12.1.0"
-  resolved "https://registry.yarnpkg.com/npm-check-updates/-/npm-check-updates-12.1.0.tgz#bf316bc35f90817880df9de175f2d69755eb9ff5"
-  integrity sha512-9GtSetBvcth7MuL+0MpOmWgdfiEgZcWRfnvoYnNZxbZpleHZCT0Z3HnbsL6/EAT2M+ye7FTZ+YjmDmZptt7Rkg==
+  version "12.2.0"
+  resolved "https://registry.yarnpkg.com/npm-check-updates/-/npm-check-updates-12.2.0.tgz#f332fff0df44fcc23d84ced192370a4480ad1e7f"
+  integrity sha512-upiHqivxtjtj/iHO7Amnd+Q5Nx5HzTwxMlu9lUzNFQvCAAFhJnPK8Weuoyz3OSwErpHVxJMry7W5d0H7Cokxdg==
   dependencies:
     chalk "^4.1.2"
     cint "^8.2.1"

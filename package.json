@@ -1,6 +1,6 @@
 {
   "name": "@pepperize/cdk-security-group",
-  "description": "This project provides a CDK construct for creating a security group with an extractable securityGroupName.",
+  "description": "This project provides a CDK construct to create an EC2 SecurityGroup, which property `securityGroupName` returns the GroupName.",
   "repository": {
     "type": "git",
     "url": "https://github.com/pepperize/cdk-security-group.git"
@@ -72,7 +72,7 @@
     "aws",
     "cdk",
     "ec2",
-    "security group"
+    "security-group"
   ],
   "main": "lib/index.js",
   "license": "MIT",
