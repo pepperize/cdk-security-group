@@ -18,6 +18,7 @@
     "package": "npx projen package",
     "package-all": "npx projen package-all",
     "package:dotnet": "npx projen package:dotnet",
+    "package:java": "npx projen package:java",
     "package:js": "npx projen package:js",
     "package:python": "npx projen package:python",
     "post-compile": "npx projen post-compile",
@@ -34,7 +35,7 @@
   },
   "author": {
     "name": "Ivan Ovdiienko",
-    "email": "ivan.ovdiienko@pepperize.com",
+    "email": "info@pepperize.com",
     "organization": true
   },
   "devDependencies": {
@@ -126,6 +127,13 @@
   "jsii": {
     "outdir": "dist",
     "targets": {
+      "java": {
+        "package": "com.pepperize.cdk.security_group",
+        "maven": {
+          "groupId": "com.pepperize",
+          "artifactId": "cdk-security-group"
+        }
+      },
       "python": {
         "distName": "pepperize.cdk-security-group",
         "module": "pepperize_cdk_security_group"
