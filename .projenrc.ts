@@ -11,6 +11,8 @@ const project = new AwsCdkConstructLibrary({
   keywords: ["aws", "cdk", "security-group", "ec2"],
   repositoryUrl: "https://github.com/pepperize/cdk-security-group.git",
 
+  projenrcTs: true,
+
   devDeps: ["@pepperize/projen-awscdk-construct"],
 
   release: {
