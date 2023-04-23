@@ -11,15 +11,18 @@ export class SecurityGroup extends aws_ec2.SecurityGroup {
   constructor(scope: Construct, id: string, props: SecurityGroupProps) {
     super(scope, id, props);
 
-    const securityGroup = new custom_resources.AwsCustomResource(this, "DescribeSGCustomResource", {
-      onCreate: {
-        service: "EC2",
-        action: "describeSecurityGroups", // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/EC2.html#describeSecurityGroups-property
-        parameters: {
-          GroupIds: [this.securityGroupId],
-        },
-        physicalResourceId: custom_resources.PhysicalResourceId.of(this.securityGroupId),
+    const sdkCall: custom_resources.AwsSdkCall = {
+      service: "EC2",
+      action: "describeSecurityGroups", // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/EC2.html#describeSecurityGroups-property
+      parameters: {
+        GroupIds: [this.securityGroupId],
       },
+      physicalResourceId: custom_resources.PhysicalResourceId.of(this.securityGroupId),
+    };
+
+    const securityGroup = new custom_resources.AwsCustomResource(this, "DescribeSGCustomResource", {
+      onCreate: sdkCall,
+      onUpdate: sdkCall,
       policy: custom_resources.AwsCustomResourcePolicy.fromSdkCalls({
         resources: custom_resources.AwsCustomResourcePolicy.ANY_RESOURCE,
       }),
