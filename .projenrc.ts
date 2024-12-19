@@ -13,7 +13,7 @@ const project = new AwsCdkConstructLibrary({
 
   projenrcTs: true,
 
-  devDeps: ["@pepperize/projen-awscdk-construct"],
+  devDeps: ["@pepperize/projen-awscdk-construct@~0.0.730"],
 
   release: {
     releaseEveryCommit: true,
