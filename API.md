@@ -4,6 +4,8 @@
 
 ### SecurityGroup <a name="SecurityGroup" id="@pepperize/cdk-security-group.SecurityGroup"></a>
 
+- *Implements:* constructs.IConstruct, constructs.IDependable, aws-cdk-lib.IResource, aws-cdk-lib.interfaces.IEnvironmentAware, aws-cdk-lib.aws_ec2.ISecurityGroup, aws-cdk-lib.aws_ec2.IConnectable, aws-cdk-lib.aws_ec2.IPeer, aws-cdk-lib.interfaces.aws_ec2.ISecurityGroupRef
+
 #### Initializers <a name="Initializers" id="@pepperize/cdk-security-group.SecurityGroup.Initializer"></a>
 
 ```typescript
@@ -43,6 +45,8 @@ new SecurityGroup(scope: Construct, id: string, props: SecurityGroupProps)
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#@pepperize/cdk-security-group.SecurityGroup.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#@pepperize/cdk-security-group.SecurityGroup.with">with</a></code> | Applies one or more mixins to this construct. |
+| <code><a href="#@pepperize/cdk-security-group.SecurityGroup.applyCrossStackReferenceStrength">applyCrossStackReferenceStrength</a></code> | Override the cross-stack reference strength for this resource. |
 | <code><a href="#@pepperize/cdk-security-group.SecurityGroup.applyRemovalPolicy">applyRemovalPolicy</a></code> | Apply the given removal policy to this resource. |
 | <code><a href="#@pepperize/cdk-security-group.SecurityGroup.addEgressRule">addEgressRule</a></code> | Add an egress rule for the current security group. |
 | <code><a href="#@pepperize/cdk-security-group.SecurityGroup.addIngressRule">addIngressRule</a></code> | Add an ingress rule for the current security group. |
@@ -58,6 +62,47 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="@pepperize/cdk-security-group.SecurityGroup.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="@pepperize/cdk-security-group.SecurityGroup.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+---
+
+##### `applyCrossStackReferenceStrength` <a name="applyCrossStackReferenceStrength" id="@pepperize/cdk-security-group.SecurityGroup.applyCrossStackReferenceStrength"></a>
+
+```typescript
+public applyCrossStackReferenceStrength(strength: ReferenceStrength): void
+```
+
+Override the cross-stack reference strength for this resource.
+
+When set, any cross-stack reference to this resource will use the specified
+mechanism instead of the global default determined by the
+`@aws-cdk/core:defaultCrossStackReferences` context key. This is useful for
+selectively weakening specific references to avoid the "deadly embrace" problem
+without changing the app-wide default.
+
+###### `strength`<sup>Required</sup> <a name="strength" id="@pepperize/cdk-security-group.SecurityGroup.applyCrossStackReferenceStrength.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use for this resource.
+
+---
 
 ##### `applyRemovalPolicy` <a name="applyRemovalPolicy" id="@pepperize/cdk-security-group.SecurityGroup.applyRemovalPolicy"></a>
 
@@ -160,7 +205,7 @@ SecurityGroup object.
 ##### `toEgressRuleConfig` <a name="toEgressRuleConfig" id="@pepperize/cdk-security-group.SecurityGroup.toEgressRuleConfig"></a>
 
 ```typescript
-public toEgressRuleConfig(): any
+public toEgressRuleConfig(): EgressRuleConfig
 ```
 
 Produce the egress rule JSON for the given connection.
@@ -168,7 +213,7 @@ Produce the egress rule JSON for the given connection.
 ##### `toIngressRuleConfig` <a name="toIngressRuleConfig" id="@pepperize/cdk-security-group.SecurityGroup.toIngressRuleConfig"></a>
 
 ```typescript
-public toIngressRuleConfig(): any
+public toIngressRuleConfig(): IngressRuleConfig
 ```
 
 Produce the ingress rule JSON for the given connection.
@@ -178,6 +223,7 @@ Produce the ingress rule JSON for the given connection.
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#@pepperize/cdk-security-group.SecurityGroup.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#@pepperize/cdk-security-group.SecurityGroup.isOwnedResource">isOwnedResource</a></code> | Returns true if the construct was created by CDK, and false otherwise. |
 | <code><a href="#@pepperize/cdk-security-group.SecurityGroup.isResource">isResource</a></code> | Check whether the given construct is a Resource. |
 | <code><a href="#@pepperize/cdk-security-group.SecurityGroup.fromLookupById">fromLookupById</a></code> | Look up a security group by id. |
 | <code><a href="#@pepperize/cdk-security-group.SecurityGroup.fromLookupByName">fromLookupByName</a></code> | Look up a security group by name. |
@@ -186,7 +232,7 @@ Produce the ingress rule JSON for the given connection.
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="@pepperize/cdk-security-group.SecurityGroup.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="@pepperize/cdk-security-group.SecurityGroup.isConstruct"></a>
 
 ```typescript
 import { SecurityGroup } from '@pepperize/cdk-security-group'
@@ -196,11 +242,41 @@ SecurityGroup.isConstruct(x: any)
 
 Checks if `x` is a construct.
 
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
+
 ###### `x`<sup>Required</sup> <a name="x" id="@pepperize/cdk-security-group.SecurityGroup.isConstruct.parameter.x"></a>
 
 - *Type:* any
 
 Any object.
+
+---
+
+##### `isOwnedResource` <a name="isOwnedResource" id="@pepperize/cdk-security-group.SecurityGroup.isOwnedResource"></a>
+
+```typescript
+import { SecurityGroup } from '@pepperize/cdk-security-group'
+
+SecurityGroup.isOwnedResource(construct: IConstruct)
+```
+
+Returns true if the construct was created by CDK, and false otherwise.
+
+###### `construct`<sup>Required</sup> <a name="construct" id="@pepperize/cdk-security-group.SecurityGroup.isOwnedResource.parameter.construct"></a>
+
+- *Type:* constructs.IConstruct
 
 ---
 
@@ -344,12 +420,14 @@ Return whether the indicated object is a security group.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@pepperize/cdk-security-group.SecurityGroup.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@pepperize/cdk-security-group.SecurityGroup.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#@pepperize/cdk-security-group.SecurityGroup.property.env">env</a></code> | <code>aws-cdk-lib.interfaces.ResourceEnvironment</code> | The environment this resource belongs to. |
 | <code><a href="#@pepperize/cdk-security-group.SecurityGroup.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
+| <code><a href="#@pepperize/cdk-security-group.SecurityGroup.property.allowAllIpv6Outbound">allowAllIpv6Outbound</a></code> | <code>boolean</code> | Whether the SecurityGroup has been configured to allow all outbound ipv6 traffic. |
 | <code><a href="#@pepperize/cdk-security-group.SecurityGroup.property.allowAllOutbound">allowAllOutbound</a></code> | <code>boolean</code> | Whether the SecurityGroup has been configured to allow all outbound traffic. |
 | <code><a href="#@pepperize/cdk-security-group.SecurityGroup.property.canInlineRule">canInlineRule</a></code> | <code>boolean</code> | Whether the rule can be inlined into a SecurityGroup or not. |
 | <code><a href="#@pepperize/cdk-security-group.SecurityGroup.property.connections">connections</a></code> | <code>aws-cdk-lib.aws_ec2.Connections</code> | The network connections associated with this resource. |
 | <code><a href="#@pepperize/cdk-security-group.SecurityGroup.property.securityGroupId">securityGroupId</a></code> | <code>string</code> | The ID of the security group. |
+| <code><a href="#@pepperize/cdk-security-group.SecurityGroup.property.securityGroupRef">securityGroupRef</a></code> | <code>aws-cdk-lib.interfaces.aws_ec2.SecurityGroupReference</code> | A reference to a SecurityGroup resource. |
 | <code><a href="#@pepperize/cdk-security-group.SecurityGroup.property.securityGroupVpcId">securityGroupVpcId</a></code> | <code>string</code> | The VPC ID this security group is part of. |
 | <code><a href="#@pepperize/cdk-security-group.SecurityGroup.property.uniqueId">uniqueId</a></code> | <code>string</code> | A unique identifier for this connection peer. |
 | <code><a href="#@pepperize/cdk-security-group.SecurityGroup.property.defaultPort">defaultPort</a></code> | <code>aws-cdk-lib.aws_ec2.Port</code> | *No description.* |
@@ -375,16 +453,17 @@ The tree node.
 public readonly env: ResourceEnvironment;
 ```
 
-- *Type:* aws-cdk-lib.ResourceEnvironment
+- *Type:* aws-cdk-lib.interfaces.ResourceEnvironment
 
 The environment this resource belongs to.
 
-For resources that are created and managed by the CDK
-(generally, those created by creating new class instances like Role, Bucket, etc.),
-this is always the same as the environment of the stack they belong to;
-however, for imported resources
-(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
-that might be different than the stack they were imported into.
+For resources that are created and managed in a Stack (those created by
+creating new class instances like `new Role()`, `new Bucket()`, etc.), this
+is always the same as the environment of the stack they belong to.
+
+For referenced resources (those obtained from referencing methods like
+`Role.fromRoleArn()`, `Bucket.fromBucketName()`, etc.), they might be
+different than the stack they were imported into.
 
 ---
 
@@ -397,6 +476,18 @@ public readonly stack: Stack;
 - *Type:* aws-cdk-lib.Stack
 
 The stack in which this resource is defined.
+
+---
+
+##### `allowAllIpv6Outbound`<sup>Required</sup> <a name="allowAllIpv6Outbound" id="@pepperize/cdk-security-group.SecurityGroup.property.allowAllIpv6Outbound"></a>
+
+```typescript
+public readonly allowAllIpv6Outbound: boolean;
+```
+
+- *Type:* boolean
+
+Whether the SecurityGroup has been configured to allow all outbound ipv6 traffic.
 
 ---
 
@@ -448,6 +539,18 @@ The ID of the security group.
 
 ---
 
+##### `securityGroupRef`<sup>Required</sup> <a name="securityGroupRef" id="@pepperize/cdk-security-group.SecurityGroup.property.securityGroupRef"></a>
+
+```typescript
+public readonly securityGroupRef: SecurityGroupReference;
+```
+
+- *Type:* aws-cdk-lib.interfaces.aws_ec2.SecurityGroupReference
+
+A reference to a SecurityGroup resource.
+
+---
+
 ##### `securityGroupVpcId`<sup>Required</sup> <a name="securityGroupVpcId" id="@pepperize/cdk-security-group.SecurityGroup.property.securityGroupVpcId"></a>
 
 ```typescript
@@ -494,6 +597,25 @@ An attribute that represents the security group name.
 
 ---
 
+#### Constants <a name="Constants" id="Constants"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@pepperize/cdk-security-group.SecurityGroup.property.PROPERTY_INJECTION_ID">PROPERTY_INJECTION_ID</a></code> | <code>string</code> | Uniquely identifies this class. |
+
+---
+
+##### `PROPERTY_INJECTION_ID`<sup>Required</sup> <a name="PROPERTY_INJECTION_ID" id="@pepperize/cdk-security-group.SecurityGroup.property.PROPERTY_INJECTION_ID"></a>
+
+```typescript
+public readonly PROPERTY_INJECTION_ID: string;
+```
+
+- *Type:* string
+
+Uniquely identifies this class.
+
+---
 
 ## Structs <a name="Structs" id="Structs"></a>
 
@@ -512,6 +634,7 @@ const securityGroupProps: SecurityGroupProps = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@pepperize/cdk-security-group.SecurityGroupProps.property.vpc">vpc</a></code> | <code>aws-cdk-lib.aws_ec2.IVpc</code> | The VPC in which to create the security group. |
+| <code><a href="#@pepperize/cdk-security-group.SecurityGroupProps.property.allowAllIpv6Outbound">allowAllIpv6Outbound</a></code> | <code>boolean</code> | Whether to allow all outbound ipv6 traffic by default. |
 | <code><a href="#@pepperize/cdk-security-group.SecurityGroupProps.property.allowAllOutbound">allowAllOutbound</a></code> | <code>boolean</code> | Whether to allow all outbound traffic by default. |
 | <code><a href="#@pepperize/cdk-security-group.SecurityGroupProps.property.description">description</a></code> | <code>string</code> | A description of the security group. |
 | <code><a href="#@pepperize/cdk-security-group.SecurityGroupProps.property.disableInlineRules">disableInlineRules</a></code> | <code>boolean</code> | Whether to disable inline ingress and egress rule optimization. |
@@ -531,6 +654,25 @@ The VPC in which to create the security group.
 
 ---
 
+##### `allowAllIpv6Outbound`<sup>Optional</sup> <a name="allowAllIpv6Outbound" id="@pepperize/cdk-security-group.SecurityGroupProps.property.allowAllIpv6Outbound"></a>
+
+```typescript
+public readonly allowAllIpv6Outbound: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Whether to allow all outbound ipv6 traffic by default.
+
+If this is set to true, there will only be a single egress rule which allows all
+outbound ipv6 traffic. If this is set to false, no outbound traffic will be allowed by
+default and all egress ipv6 traffic must be explicitly authorized.
+
+To allow all ipv4 traffic use allowAllOutbound
+
+---
+
 ##### `allowAllOutbound`<sup>Optional</sup> <a name="allowAllOutbound" id="@pepperize/cdk-security-group.SecurityGroupProps.property.allowAllOutbound"></a>
 
 ```typescript
@@ -545,6 +687,8 @@ Whether to allow all outbound traffic by default.
 If this is set to true, there will only be a single egress rule which allows all
 outbound traffic. If this is set to false, no outbound traffic will be allowed by
 default and all egress traffic must be explicitly authorized.
+
+To allow all ipv6 traffic use allowAllIpv6Outbound
 
 ---
 
@@ -578,7 +722,7 @@ SecurityGroup in cloudformation, but will be separate elements.
 Inlining rules is an optimization for producing smaller stack templates. Sometimes
 this is not desirable, for example when security group access is managed via tags.
 
-The default value can be overriden globally by setting the context variable
+The default value can be overridden globally by setting the context variable
 '@aws-cdk/aws-ec2.securityGroupDisableInlineRules'.
 
 ---
